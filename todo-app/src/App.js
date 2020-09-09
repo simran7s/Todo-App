@@ -4,6 +4,7 @@ import './App.css';
 // Importing Components
 import Form from './components/Form';
 import TodoList from './components/TodoList';
+import Alerts from './components/Alerts';
 
 function App() {
   // States
@@ -11,6 +12,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState('all');
   const [filteredTodos, setFilteredTodos] = useState([]);
+  const [alerts, setAlerts] = useState([]);
 
   //Run on mount
   useEffect(() => {
@@ -56,6 +58,9 @@ function App() {
       <header>
         <h1>Simran's Todo List</h1>
       </header>
+      <div>
+        <Alerts alerts={alerts} setAlerts={setAlerts} />
+      </div>
       <Form
         inputText={inputText}
         todos={todos}
@@ -63,7 +68,10 @@ function App() {
         setInputText={setInputText}
         status={status}
         setStatus={setStatus}
+        alerts={alerts}
+        setAlerts={setAlerts}
       />
+
       <TodoList
         todos={todos}
         setTodos={setTodos}

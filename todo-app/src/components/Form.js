@@ -7,8 +7,8 @@ const Form = ({
   setInputText,
   todos,
   setTodos,
-  status,
   setStatus,
+  setAlerts,
 }) => {
   const inputTextHandler = (e) => {
     setInputText(e.target.value);
@@ -16,11 +16,19 @@ const Form = ({
 
   const submitTodoHandler = (e) => {
     e.preventDefault();
-    setTodos([
-      ...todos,
-      { text: inputText, completed: false, id: Math.random() * 1000 },
-    ]);
-    setInputText('');
+    if (inputText !== '') {
+      setTodos([
+        ...todos,
+        { text: inputText, completed: false, id: Math.random() * 1000 },
+      ]);
+      setInputText('');
+      setAlerts([]);
+    } else {
+      setAlerts([{ message: 'Please fill in all fields' }]);
+      setTimeout(() => {
+        setAlerts([]);
+      }, 3000);
+    }
   };
 
   const statusHandler = (e) => {
